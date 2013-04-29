@@ -1,7 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_Controller {
-
+	
+	public $data = array();
 	/**
 	 * Index Page for this controller.
 	 *
@@ -17,30 +18,66 @@ class Home extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+	public function __construct()
 	{
-		$this->homepage();
+		parent::__construct();
+		$page = $this->uri->segment(2);
+		if(isset($page) && ($page=='' || $page=='homePage' || $page=='contact_us_pro')){ $title = 'About'; }
+		else if(isset($page) && $page=='home1'){ $title =  'Products and services'; }
+		else if(isset($page) && $page=='home2'){ $title =  'Products'; }
+		else if(isset($page) && $page=='home3'){ $title =  'Industries'; }
+		else if(isset($page) && $page=='home4'){ $title =  'Privacy policy'; }
+		$this->data = array(
+							'title' => $title,
+							'page' => $page
+							);
+		//$this->homepage();
+		if($page==''){
+			redirect('home/homePage');
+		}
+		
 	}
 	
-	function homepage(){
-		$this->load->view('home');
+	function homePage(){		
+		$data = $this->data;				
+		$this->load->view('home',$data);
 	}
 	
 	function home1(){
-		$this->load->view('home1');
+		$data = $this->data;		
+		$this->load->view('home1',$data);
 	}
 	
 	function home2(){
-		$this->load->view('home2');
+		$data = $this->data;
+		$this->load->view('home2',$data);
 	}
 	
 	function home3(){
-		$this->load->view('home3');
+		$data = $this->data;
+		$this->load->library('form_validation');	
+		$this->form_validation->set_rules('name', 'name', 'required');
+		$this->form_validation->set_rules('email', 'email', 'required|valid_email');
+		$this->form_validation->set_rules('fax', 'fax', 'required|numeric');
+		$this->form_validation->set_rules('message', 'message', 'required|min_length[50]');
+		$this->form_validation->set_error_delimiters('<div class="error" style="color:red;">', '</div>');
+		
+		if ($this->form_validation->run() == FALSE){
+			$this->load->view('home3',$data);
+		}else{
+			$data['name'] = $this->input->post('name');
+			$data['email'] = $this->input->post('email');
+			$data['fax'] = $this->input->post('fax');
+			$data['message'] = $this->input->post('message');
+			dumpEx($data);
+		}
 	}	
 	
 	function home4(){
-		$this->load->view('home4');
-	}
+		$data = $this->data;
+		$this->load->view('home4',$data);
+	}	
+	
 }
 
 /* End of file welcome.php */

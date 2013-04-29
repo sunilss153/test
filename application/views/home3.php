@@ -95,23 +95,25 @@ $this->load->view('common/header');
 							<li><a href="#">Mauris accumsan nulla velu diam</a></li>
 						</ul>
 					</div>
+					
 					<div class="grid6">
 						<h3>Contact Form</h3>
-						<form action="" id="contacts-form">
+						<form action="<?=base_url()?>index.php/home/home3" method='post' id="contacts-form">
+							<?= validation_errors(); ?>
 							<fieldset>
 								<div class="grid3 first">
 									<label>Name:<br />
-										<input type="text" value="" />
+										<input name='name' type="text" value="" />
 									</label>
 									<label>E-mail:<br />
-										<input type="email" value="" />
+										<input name='email' type="email" value="" />
 									</label>
 									<label>Fax:<br />
-										<input type="text" value="" />
+										<input name='fax' type="text" value="" />
 									</label>
 								</div>
 								<div class="grid3">Message:<br />
-									<textarea></textarea>
+									<textarea name='message' ></textarea>
 									<div class="alignright">
 										<a href="#" class="alt" onClick="document.getElementById('contacts-form').reset()">Clear</a> &nbsp; &nbsp; &nbsp;<a href="#" class="alt" onClick="document.getElementById('contacts-form').submit()">Submit</a>
 									</div>
@@ -119,6 +121,9 @@ $this->load->view('common/header');
 							</fieldset>
 						</form>
 					</div>
+					
+					
+					
 				</div>
 			</div>
 		</div>
