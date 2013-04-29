@@ -22,7 +22,7 @@ class Home extends CI_Controller {
 	{
 		parent::__construct();
 		$page = $this->uri->segment(2);
-		if(isset($page) && ($page=='' || $page=='homePage' || $page=='contact_us_pro')){ $title = 'About'; }
+		if(isset($page) && ($page=='' || $page=='homePage')){ $title = 'About'; }
 		else if(isset($page) && $page=='home1'){ $title =  'Products and services'; }
 		else if(isset($page) && $page=='home2'){ $title =  'Products'; }
 		else if(isset($page) && $page=='home3'){ $title =  'Industries'; }
@@ -69,7 +69,10 @@ class Home extends CI_Controller {
 			$data['email'] = $this->input->post('email');
 			$data['fax'] = $this->input->post('fax');
 			$data['message'] = $this->input->post('message');
-			dumpEx($data);
+			//dumpEx($data);
+			$this->session->set_flashdata('form_submited', 'Form submited successfully');
+			$this->load->view('home3',$data);
+			
 		}
 	}	
 	

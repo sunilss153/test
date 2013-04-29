@@ -17,13 +17,10 @@
 			<div class="container">
 				<ul class="breadcrumbs">
 					<li><?=$title;?></li>
+					<?="<br/><span style='background-color:green; color:white; width:150px; height:10px;'>{$this->session->flashdata('form_submited')}</span><br/>"?>
 				</ul>
-				<form action="" id="search-form">
-					<fieldset>
-						<input type="text" value=""><input type="submit" value="">
-					</fieldset>
-				</form>
+				<form action="" id="search-form"><fieldset><input type="text" value=""><input type="submit" value="" ></fieldset></form>
 			</div>
-		</section><div class="ic">More Website Templates at TemplateMonster.com!</div>
+		</section><div class="ic">More</div>
 	</header>
 	
